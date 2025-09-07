@@ -1,0 +1,7 @@
+{% extends 'posts/base.html' %}
+{% block content %}
+<h1>{{ object.title }}</h1>
+<p><small>Категория: {{ object.category.name }} | {{ object.created_at }}</small></p>
+<p>{{ object.content }}</p>
+<a href="{% url 'home' %}" class="btn btn-secondary">Назад</a>
+{% endblock %}
