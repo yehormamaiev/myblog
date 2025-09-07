@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
+from django.utils import timezone
 
 
 class Category(models.Model):
@@ -20,6 +21,8 @@ class Post(models.Model):
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     content = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='posts')
+    image = models.ImageField(upload_to='posts/image/', blank=True, null=True)
+    video = models.FileField(upload_to='posts/video/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=True)

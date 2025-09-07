@@ -1,7 +1,26 @@
-{% extends 'posts/base.html' %}
+{% extends "posts/base.html" %}
 {% block content %}
-<h1>{{ object.title }}</h1>
-<p><small>Категория: {{ object.category.name }} | {{ object.created_at }}</small></p>
-<p>{{ object.content }}</p>
-<a href="{% url 'home' %}" class="btn btn-secondary">Назад</a>
+<div class="post-detail">
+     <button onclick="window.history.back()" class="btn btn-secondary" style="margin-bottom:15px;">
+        ← Назад
+    </button>
+    <h1>{{ post.title }}</h1>
+
+    {% if post.image %}
+        <img src="{{ post.image.url }}" alt="{{ post.title }}" style="max-width:600px; margin:15px 0;">
+    {% endif %}
+
+    <div class="post-content">
+        <p>{{ post.content|linebreaks }}</p>
+    </div>
+
+    {% if post.video %}
+        <video width="600" controls style="margin-top:15px;">
+            <source src="{{ post.video.url }}" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+    {% endif %}
+
+    <p><em>Опубликовано: {{ post.created_at|date:"d.m.Y H:i" }}</em></p>
+</div>
 {% endblock %}
